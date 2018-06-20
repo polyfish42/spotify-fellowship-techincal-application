@@ -19,3 +19,16 @@ Optional
 - [ ] Handle too many events to fit in your box UI on a given day.
 - [ ] You should be able to update/delete events. How you implement this UX is up to you.
 - [ ] The UI should have 5 rows of 7 boxes with the correct date on the correct days.
+
+Events (Minimum Required API)
+- [ ] POST /events
+    - [ ] Should create an event
+
+- [ ] GET /events
+    - [ ] Should return all events
+
+Events (Optional API)
+- [ ] DELETE /events/:id
+    - [ ] Should delete an event
+- [ ] PUT /events/:id
+    - [ ] Should update an existing event
