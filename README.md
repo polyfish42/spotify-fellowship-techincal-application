@@ -20,15 +20,8 @@ Optional
 - [ ] You should be able to update/delete events. How you implement this UX is up to you.
 - [ ] The UI should have 5 rows of 7 boxes with the correct date on the correct days.
 
-Events (Minimum Required API)
-- [ ] POST /events
-    - [ ] Should create an event
-
-- [ ] GET /events
-    - [ ] Should return all events
-
-Events (Optional API)
-- [ ] DELETE /events/:id
-    - [ ] Should delete an event
-- [ ] PUT /events/:id
-    - [ ] Should update an existing event
+Events API
+- [X] POST /events should create an event
+- [X] GET /events should return all events
+- [X] DELETE /events/:id should delete an event
+- [X] PUT /events/:id should update an existing event
