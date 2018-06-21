@@ -14,10 +14,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
     @IBOutlet weak var eventTitle: UITextField!
     
+    @IBOutlet weak var startDatePicker: UIDatePicker!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         eventTitle.delegate = self
+        startDatePicker.isHidden = true
     }
     
     //MARK: UITextFieldDelegate
@@ -27,6 +30,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: Actions
+    
+    @IBAction func tapStartDate(_ sender: UIButton) {
+        startDatePicker.isHidden = false
+    }
+    
     @IBAction func submitEvent(_ sender: UIButton) {
         struct CalendarEvent: Encodable {
             var title: String
