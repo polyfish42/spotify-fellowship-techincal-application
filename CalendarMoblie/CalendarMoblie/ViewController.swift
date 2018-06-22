@@ -93,7 +93,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func submitEvent(_ sender: UIButton) {
-        guard let uploadData = try? JSONEncoder().encode(calEvent) else {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        
+        guard let uploadData = try? encoder.encode(calEvent) else {
             return
         }
         
