@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: Model
-    var calEvent = CalendarEvent(title: "", startDate: Date(), endDate: Date(), description: "")
+    var calEvent: CalendarEvent!
     
     //MARK: Properties
     @IBOutlet weak var eventTitle: UITextField!
@@ -43,6 +43,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         let startTime = startingDisplayTime()
         let endTime = startingDisplayTime() + 60 * 60
+        
+        calEvent = CalendarEvent(title: "", startDate: startTime, endDate: endTime, description: "")
         
         submitButton.isEnabled = false
         eventTitle.delegate = self
@@ -94,14 +96,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func alertIfEndBeforeStart() {
+        if calEvent.startDate > calEvent.endDate {
+            endDate.setTitleColor(.red, for: .normal)
+        } else {
+            endDate.setTitleColor(self.view.tintColor, for: .normal)
+        }
+    }
+    
     @IBAction func startDatePicked(_ sender: UIDatePicker) {
         calEvent.startDate = startDatePicker.date
         setDisplayTime(button: startDate, date: startDatePicker.date)
+        alertIfEndBeforeStart()
     }
     
     @IBAction func endDatePicked(_ sender: UIDatePicker) {
         calEvent.endDate = endDatePicker.date
         setDisplayTime(button: endDate, date: endDatePicker.date)
+        alertIfEndBeforeStart()
     }
     
     @IBAction func submitEvent(_ sender: UIButton) {
