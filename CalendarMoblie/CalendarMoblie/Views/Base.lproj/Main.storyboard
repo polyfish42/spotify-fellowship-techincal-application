@@ -46,6 +46,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iko-Oe-1ng">
                                                 <rect key="frame" x="46" y="0.0" width="274" height="30"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <state key="normal" title="Start Date"/>
                                                 <connections>
                                                     <action selector="tapStartDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gMr-ts-oKg"/>
@@ -97,6 +98,9 @@
                                         <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
                                             <!--2037-12-31 11:00:00 +0000-->
                                         </date>
+                                        <connections>
+                                            <action selector="endDatePicked:" destination="BYZ-38-t0r" eventType="valueChanged" id="dnB-uP-aS1"/>
+                                        </connections>
                                     </datePicker>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaI-tw-Q1f">
                                         <rect key="frame" x="0.0" y="534" width="320" height="30"/>
@@ -131,8 +135,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="endDate" destination="ifx-8A-u9l" id="3Kx-Lb-vBf"/>
                         <outlet property="endDatePicker" destination="Mvv-MD-s8b" id="X2H-cU-swl"/>
                         <outlet property="eventTitle" destination="T5L-Fb-Dlp" id="tbE-mW-qqx"/>
+                        <outlet property="startDate" destination="Iko-Oe-1ng" id="L3N-2c-DrR"/>
                         <outlet property="startDatePicker" destination="6al-Mj-x38" id="YMA-Hj-BxF"/>
                     </connections>
                 </viewController>

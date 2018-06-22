@@ -7,53 +7,47 @@
 //
 
 import UIKit
-import Foundation
 
 class ViewController: UIViewController, UITextFieldDelegate {
+    //MARK: Model
+    var calEvent = CalendarEvent(title: "", startDate: Date(), endDate: Date(), description: "")
     
     //MARK: Properties
     @IBOutlet weak var eventTitle: UITextField!
+    @IBOutlet weak var startDate: UIButton!
+    @IBOutlet weak var endDate: UIButton!
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     
-    struct CalendarEvent: Encodable {
-        var title: String
-        var startDate: Date
-        var endDate: Date
-        var description: String
+    func setDisplayTime(button: UIButton!, date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .short
         
-        enum CodingKeys: String, CodingKey {
-            case event
-        }
-        
-        enum Event: String, CodingKey {
-            case title
-            case startDate = "start_date"
-            case endDate = "end_date"
-            case description
-        }
-        
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            var event = container.nestedContainer(keyedBy: Event.self, forKey: .event)
-            try event.encode(title, forKey: .title)
-            try event.encode(startDate, forKey: .startDate)
-            try event.encode(endDate, forKey: .endDate)
-            try event.encode(description, forKey: .description)
-        }
+        button.setTitle(dateFormatter.string(from: date), for: .normal)
     }
     
-    var calEvent = CalendarEvent(title: "", startDate: Date.init(), endDate: Date.init(), description: "")
+    func startingDisplayTime() -> Date {
+        let cal = Calendar.current
+        let now = Date()
+        
+        let hour = cal.component(.hour, from: now)
+        return cal.date(bySettingHour: hour, minute: 0, second: 0, of: now)!
+    }
+    
+    //MARK: Initialize
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         eventTitle.delegate = self
+        setDisplayTime(button: startDate, date: startingDisplayTime())
+        setDisplayTime(button: endDate, date: startingDisplayTime() + 60 * 60)
         startDatePicker.isHidden = true
         endDatePicker.isHidden = true
     }
     
-    //MARK: UITextFieldDelegate
+    //MARK: Actions
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -66,8 +60,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func descriptionDidEndEditing(_ sender: UITextField) {
         calEvent.description = sender.text!
     }
-    
-    //MARK: Actions
     
     @IBAction func tapStartDate(_ sender: UIButton) {
         if startDatePicker.isHidden {
@@ -88,8 +80,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func startDatePicked(_ sender: UIDatePicker) {
-        let date = startDatePicker.date
-        print(date)
+        calEvent.startDate = startDatePicker.date
+        setDisplayTime(button: startDate, date: startDatePicker.date)
+    }
+    
+    @IBAction func endDatePicked(_ sender: UIDatePicker) {
+        calEvent.endDate = endDatePicker.date
+        setDisplayTime(button: endDate, date: endDatePicker.date)
     }
     
     @IBAction func submitEvent(_ sender: UIButton) {

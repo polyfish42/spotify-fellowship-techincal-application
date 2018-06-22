@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5026C7D020DD6DA800AE4C85 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5026C7CF20DD6DA800AE4C85 /* CalendarEvent.swift */; };
 		50D26A7820DAF76F00995340 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D26A7720DAF76F00995340 /* AppDelegate.swift */; };
 		50D26A7A20DAF76F00995340 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D26A7920DAF76F00995340 /* ViewController.swift */; };
 		50D26A7D20DAF76F00995340 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D26A7B20DAF76F00995340 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5026C7CF20DD6DA800AE4C85 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
 		50D26A7420DAF76F00995340 /* CalendarMoblie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMoblie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D26A7720DAF76F00995340 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D26A7920DAF76F00995340 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5026C7D120DD6E7D00AE4C85 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5026C7CF20DD6DA800AE4C85 /* CalendarEvent.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5026C7D220DD6EBB00AE4C85 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				50D26A7B20DAF76F00995340 /* Main.storyboard */,
+				50D26A8020DAF77100995340 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5026C7D320DD6EC300AE4C85 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				50D26A7920DAF76F00995340 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		50D26A6B20DAF76F00995340 = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +124,11 @@
 		50D26A7620DAF76F00995340 /* CalendarMoblie */ = {
 			isa = PBXGroup;
 			children = (
+				5026C7D120DD6E7D00AE4C85 /* Model */,
 				50D26A7720DAF76F00995340 /* AppDelegate.swift */,
-				50D26A7920DAF76F00995340 /* ViewController.swift */,
-				50D26A7B20DAF76F00995340 /* Main.storyboard */,
+				5026C7D320DD6EC300AE4C85 /* Controllers */,
+				5026C7D220DD6EBB00AE4C85 /* Views */,
 				50D26A7E20DAF77100995340 /* Assets.xcassets */,
-				50D26A8020DAF77100995340 /* LaunchScreen.storyboard */,
 				50D26A8320DAF77100995340 /* Info.plist */,
 			);
 			path = CalendarMoblie;
@@ -257,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D26A7A20DAF76F00995340 /* ViewController.swift in Sources */,
+				5026C7D020DD6DA800AE4C85 /* CalendarEvent.swift in Sources */,
 				50D26A7820DAF76F00995340 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
