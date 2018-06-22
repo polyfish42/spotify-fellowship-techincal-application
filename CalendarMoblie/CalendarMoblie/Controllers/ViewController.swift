@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var endDate: UIButton!
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
+    @IBOutlet weak var submitButton: UIButton!
     
     func setDisplayTime(button: UIButton!, date: Date) {
         let dateFormatter = DateFormatter()
@@ -43,6 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let startTime = startingDisplayTime()
         let endTime = startingDisplayTime() + 60 * 60
         
+        submitButton.isEnabled = false
         eventTitle.delegate = self
         setDisplayTime(button: startDate, date: startTime)
         setDisplayTime(button: endDate, date: endTime)
@@ -58,12 +60,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func titleDidEndEditing(_ sender: UITextField) {
-        calEvent.title = sender.text!
+    @IBAction func titleIsEditing(_ textField: UITextField) {
+        if textField.text! == "" {
+            submitButton.isEnabled = false
+        } else {
+            submitButton.isEnabled = true
+        }
     }
     
-    @IBAction func descriptionDidEndEditing(_ sender: UITextField) {
-        calEvent.description = sender.text!
+    @IBAction func titleDidEndEditing(_ textField: UITextField) {
+        calEvent.title = textField.text!
+    }
+    
+    @IBAction func descriptionDidEndEditing(_ textField: UITextField) {
+        calEvent.description = textField.text!
     }
     
     @IBAction func tapStartDate(_ sender: UIButton) {
