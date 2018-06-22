@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func setDisplayTime(button: UIButton!, date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
-        dateFormatter.dateStyle = .short
+        dateFormatter.dateStyle = .medium
         
         button.setTitle(dateFormatter.string(from: date), for: .normal)
     }
@@ -40,10 +40,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let startTime = startingDisplayTime()
+        let endTime = startingDisplayTime() + 60 * 60
+        
         eventTitle.delegate = self
-        setDisplayTime(button: startDate, date: startingDisplayTime())
-        setDisplayTime(button: endDate, date: startingDisplayTime() + 60 * 60)
+        setDisplayTime(button: startDate, date: startTime)
+        setDisplayTime(button: endDate, date: endTime)
         startDatePicker.isHidden = true
+        startDatePicker.date = startTime
+        endDatePicker.date = endTime
         endDatePicker.isHidden = true
     }
     
