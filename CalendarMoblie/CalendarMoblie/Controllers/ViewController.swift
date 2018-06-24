@@ -56,10 +56,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         endDatePicker.isHidden = true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     //MARK: Actions
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func titleIsTapped(_ sender: Any) {
+        startDatePicker.isHidden = true
+        endDatePicker.isHidden = true
     }
     
     @IBAction func titleIsEditing(_ textField: UITextField) {
@@ -96,7 +105,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func alertIfEndBeforeStart() {
+    func warnIfEndBeforeStart() {
         if calEvent.startDate > calEvent.endDate {
             endDate.setTitleColor(.red, for: .normal)
         } else {
@@ -107,16 +116,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func startDatePicked(_ sender: UIDatePicker) {
         calEvent.startDate = startDatePicker.date
         setDisplayTime(button: startDate, date: startDatePicker.date)
-        alertIfEndBeforeStart()
+        warnIfEndBeforeStart()
     }
     
     @IBAction func endDatePicked(_ sender: UIDatePicker) {
         calEvent.endDate = endDatePicker.date
         setDisplayTime(button: endDate, date: endDatePicker.date)
-        alertIfEndBeforeStart()
+        warnIfEndBeforeStart()
+    }
+    
+    func alertEndBeforeStart() {
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        let alert = UIAlertController(title: "Cannot Save Event",
+                                      message: "The start date must be before the end date.",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
+
+    @IBAction func descriptionIsTapped(_ sender: Any) {
+        startDatePicker.isHidden = true
+        endDatePicker.isHidden = true
     }
     
     @IBAction func submitEvent(_ sender: UIButton) {
+        if calEvent.startDate > calEvent.endDate {
+            alertEndBeforeStart()
+            return
+        }
+        
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         

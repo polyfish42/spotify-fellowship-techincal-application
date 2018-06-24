@@ -28,10 +28,11 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="321" height="17"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="titleDidEndEditing:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="jmm-jY-kHF"/>
                                                     <action selector="titleIsEditing:" destination="BYZ-38-t0r" eventType="editingChanged" id="WeL-rR-MVk"/>
+                                                    <action selector="titleIsTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="fE2-sg-NKw"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -50,7 +51,7 @@
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <state key="normal" title="Start Date"/>
                                                 <connections>
-                                                    <action selector="tapStartDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gMr-ts-oKg"/>
+                                                    <action selector="tapStartDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="138-jY-n1c"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -68,10 +69,29 @@
                                         </date>
                                         <connections>
                                             <action selector="startDatePicked:" destination="BYZ-38-t0r" eventType="valueChanged" id="uns-Z4-h8f"/>
+                                            <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="LOG-2J-xMG"/>
                                         </connections>
                                     </datePicker>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpk-vq-Cbj">
+                                        <rect key="frame" x="0.0" y="278" width="321" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMM-rX-H2u">
+                                                <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifx-8A-u9l">
+                                                <rect key="frame" x="38" y="0.0" width="283" height="30"/>
+                                                <state key="normal" title="End Date"/>
+                                                <connections>
+                                                    <action selector="tapEndDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eWp-IL-ttW"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mvv-MD-s8b">
-                                        <rect key="frame" x="0.0" y="278" width="321" height="216"/>
+                                        <rect key="frame" x="0.0" y="313" width="321" height="216"/>
                                         <date key="date" timeIntervalSinceReferenceDate="551307699.38638198">
                                             <!--2018-06-21 21:01:39 +0000-->
                                         </date>
@@ -85,24 +105,6 @@
                                             <action selector="endDatePicked:" destination="BYZ-38-t0r" eventType="valueChanged" id="dnB-uP-aS1"/>
                                         </connections>
                                     </datePicker>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpk-vq-Cbj">
-                                        <rect key="frame" x="0.0" y="499" width="321" height="30"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMM-rX-H2u">
-                                                <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifx-8A-u9l">
-                                                <rect key="frame" x="38" y="0.0" width="283" height="30"/>
-                                                <state key="normal" title="End Date"/>
-                                                <connections>
-                                                    <action selector="tapEndDate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a3N-Re-20f"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaI-tw-Q1f">
                                         <rect key="frame" x="0.0" y="534" width="321" height="30"/>
                                         <subviews>
@@ -114,6 +116,7 @@
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="descriptionDidEndEditing:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="vF6-te-nll"/>
+                                                    <action selector="descriptionIsTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="0ec-pI-AkI"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
