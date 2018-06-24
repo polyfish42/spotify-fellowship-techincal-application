@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var endDate: UIButton!
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
+    @IBOutlet weak var eventDescription: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
     func setDisplayTime(button: UIButton!, date: Date) {
@@ -46,8 +47,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         calEvent = CalendarEvent(title: "", startDate: startTime, endDate: endTime, description: "")
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         submitButton.isEnabled = false
         eventTitle.delegate = self
+        eventDescription.delegate = self
         setDisplayTime(button: startDate, date: startTime)
         setDisplayTime(button: endDate, date: endTime)
         startDatePicker.isHidden = true
@@ -58,6 +64,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        eventTitle.resignFirstResponder()
+        eventDescription.resignFirstResponder()
+        startDatePicker.isHidden = true
+        endDatePicker.isHidden = true
     }
     
     //MARK: Actions

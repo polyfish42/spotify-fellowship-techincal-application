@@ -113,7 +113,7 @@
                                                 <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="descriptionDidEndEditing:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="vF6-te-nll"/>
                                                     <action selector="descriptionIsTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="0ec-pI-AkI"/>
@@ -162,6 +162,7 @@
                     <connections>
                         <outlet property="endDate" destination="ifx-8A-u9l" id="3Kx-Lb-vBf"/>
                         <outlet property="endDatePicker" destination="Mvv-MD-s8b" id="X2H-cU-swl"/>
+                        <outlet property="eventDescription" destination="IIT-PP-Eh0" id="NTm-as-0s0"/>
                         <outlet property="eventTitle" destination="T5L-Fb-Dlp" id="tbE-mW-qqx"/>
                         <outlet property="startDate" destination="Iko-Oe-1ng" id="L3N-2c-DrR"/>
                         <outlet property="startDatePicker" destination="6al-Mj-x38" id="YMA-Hj-BxF"/>
