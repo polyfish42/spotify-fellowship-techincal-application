@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class NewEventViewController: UIViewController, UITextFieldDelegate {
     //MARK: Model
     var calEvent: CalendarEvent!
     
@@ -148,10 +148,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(okAction)
         self.present(alert, animated: true)
     }
-
+    
     @IBAction func descriptionIsTapped(_ sender: Any) {
         startDatePicker.isHidden = true
         endDatePicker.isHidden = true
+    }
+    
+    @IBAction func tapCancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitEvent(_ sender: UIButton) {
@@ -181,7 +185,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
-                    print("server error")
+                    let okAction = UIAlertAction(title: "OK", style: .default)
+                    
+                    let alert = UIAlertController(title: "Cannot Save Event",
+                                                  message: "We're sorry, but we're having trouble saving your event. Please try again later.",
+                                                  preferredStyle: .alert)
+                    
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true)
                     return
             }
             
@@ -190,6 +201,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let data = data,
                 let dataString = String(data: data, encoding: .utf8) {
                 print("got data: \(dataString)")
+                self.dismiss(animated: true, completion: nil)
             }
             
         }
