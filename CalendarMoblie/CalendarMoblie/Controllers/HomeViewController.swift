@@ -108,7 +108,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     }
     
     @IBAction func tappedDay(_ sender: IdentifiedButton) {
-        print(sender.buttonIdentifier)
+        if let day = sender.buttonIdentifier {
+         print(filterEvents(day: day))
+        }
+    }
+    
+    func filterEvents(day: Date) -> [CalendarEvent] {
+        print(day)
+        return events.filter { (event) -> Bool in
+            let start = userCalendar.startOfDay(for: event.startDate)
+            let end = userCalendar.startOfDay(for: event.endDate)
+            
+            return (start...end).contains(day)
+        }
     }
     
     func fetchEvents() {
