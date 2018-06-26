@@ -30,7 +30,6 @@ class CalendarViewDay: UICollectionViewCell {
     
     @objc
     func tapFunction(sender:UITapGestureRecognizer) {
-//        print(dayNumberLabel.date)
         delegate?.tapped(day: dayNumberLabel.date)
     }
 }

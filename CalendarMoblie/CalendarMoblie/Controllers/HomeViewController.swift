@@ -76,7 +76,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     }
     
     func startOfMonth() -> Date {
-        return userCalendar.date(from: userCalendar.dateComponents([.year, .month], from: userCalendar.startOfDay(for: displayedDate)))!
+        return userCalendar.date(from: userCalendar.dateComponents([.year, .month], from: startOfDay(date: displayedDate)))!
     }
     
     func endOfMonth() -> Date {
@@ -114,11 +114,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         udpateDisplayMonth()
     }
     
+    func startOfDay(date: Date) -> Date {
+        return userCalendar.date(bySettingHour: 0, minute: 0, second: 0, of: date)!
+    }
+    
     func filterEvents(day: Date) -> [CalendarEvent] {
         return events.filter { (event) -> Bool in
-            let start = userCalendar.startOfDay(for: event.startDate)
-            let end = userCalendar.startOfDay(for: event.endDate)
             
+            let start = startOfDay(date: event.startDate)
+            let end = startOfDay(date: event.endDate)
+
             return (start...end).contains(day)
         }
     }
