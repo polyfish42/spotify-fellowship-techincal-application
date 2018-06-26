@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     let today = Date()
     var displayedDate = Date()
     let userCalendar = Calendar.current
-    var days: [Int] = []
+    var days: [Date?] = []
     
     //MARK: Properties
     @IBOutlet weak var displayedDateLabel: UILabel!
@@ -37,16 +37,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         let day = collectionView.dequeueReusableCell(withReuseIdentifier: "Day", for: indexPath) as! CalendarViewDay
         
         day.dayNumberLabel.text = dateText(idx: indexPath.item)
+        day.date = days[indexPath.item]
         
         return day
     }
     
     func dateText(idx: Int) -> String {
         switch days[idx] {
-        case 0:
+        case nil:
             return ""
         default:
-            return String(days[idx])
+            return String(userCalendar.component(.day, from: days[idx]!))
         }
     }
     
@@ -60,18 +61,38 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     
     func udpateDisplayMonth() {
         updateDisplayedDateLabel()
-        days = Array(repeating: 0, count: numberOfEmptyDays())
-        let daysInMonth = userCalendar.range(of: .day, in: .month, for: displayedDate)!
-        days += Array(daysInMonth.lowerBound..<daysInMonth.upperBound)
+        days = Array(repeating: nil, count: numberOfEmptyDays())
+        days += datesInDisplayedMonth()
         DispatchQueue.main.async {
             self.collectionView!.reloadData()
         }
     }
     
+    func startOfMonth() -> Date {
+        return userCalendar.date(from: userCalendar.dateComponents([.year, .month], from: userCalendar.startOfDay(for: displayedDate)))!
+    }
+    
+    func endOfMonth() -> Date {
+        return userCalendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth())!
+    }
+    
     func numberOfEmptyDays() -> Int {
-        let startOfMonth = userCalendar.date(from: userCalendar.dateComponents([.year, .month], from: userCalendar.startOfDay(for: displayedDate)))!
-        let weekDay = userCalendar.component(.weekday, from: startOfMonth)
+        let weekDay = userCalendar.component(.weekday, from: startOfMonth())
         return weekDay - 1
+    }
+    
+    func datesInDisplayedMonth()-> [Date?] {
+        var dates: [Date?] = []
+        var startDate = startOfMonth()
+        let endDate = endOfMonth()
+        
+        
+        while startDate <= endDate {
+            dates.append(startDate)
+            startDate = userCalendar.date(byAdding: .day, value: 1, to: startDate)!
+        }
+        
+        return dates
     }
     
     //MARK: Actions

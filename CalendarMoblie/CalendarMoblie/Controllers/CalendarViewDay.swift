@@ -9,5 +9,8 @@
 import UIKit
 
 class CalendarViewDay: UICollectionViewCell {
+    var date: Date! = Date()
+    var hasEvents: Bool = false
+    
     @IBOutlet weak var dayNumberLabel: UILabel!
 }
