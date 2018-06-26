@@ -36,8 +36,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         
         let day = collectionView.dequeueReusableCell(withReuseIdentifier: "Day", for: indexPath) as! CalendarViewDay
         
-        day.dayNumberLabel.text = dateText(idx: indexPath.item)
-        day.date = days[indexPath.item]
+        day.dayNumberLabel.setTitle(dateText(idx: indexPath.item), for: .normal)
+        day.dayNumberLabel.buttonIdentifier = days[indexPath.item]
         
         return day
     }
@@ -105,6 +105,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     @IBAction func displayPrevMonth(_ sender: UIButton) {
         displayedDate = userCalendar.date(byAdding: .month, value: -2, to: displayedDate)!
         udpateDisplayMonth()
+    }
+    
+    @IBAction func tappedDay(_ sender: IdentifiedButton) {
+        print(sender.buttonIdentifier)
     }
     
     func fetchEvents() {

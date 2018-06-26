@@ -8,9 +8,12 @@
 
 import UIKit
 
+class IdentifiedButton: UIButton {
+    var buttonIdentifier: Date!
+}
+
 class CalendarViewDay: UICollectionViewCell {
-    var date: Date! = Date()
     var hasEvents: Bool = false
     
-    @IBOutlet weak var dayNumberLabel: UILabel!
+    @IBOutlet weak var dayNumberLabel: IdentifiedButton!
 }
