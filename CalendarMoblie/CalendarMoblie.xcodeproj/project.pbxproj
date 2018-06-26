@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		5026C7CF20DD6DA800AE4C85 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
-		50C71B7320E179930067B71D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		50C71B7320E179930067B71D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; tabWidth = 3; };
 		50C71B7720E1941E0067B71D /* CalendarViewDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDay.swift; sourceTree = "<group>"; };
 		50D26A7420DAF76F00995340 /* CalendarMoblie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMoblie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D26A7720DAF76F00995340 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
