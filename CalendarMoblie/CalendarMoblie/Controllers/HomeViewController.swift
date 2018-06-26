@@ -47,6 +47,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchEvents()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -60,5 +62,38 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         day.dayNumberLabel.text = days[indexPath.item]
         
         return day
+    }
+    
+    func fetchEvents() {
+        let url = URL(string: "http://localhost:3000/api/events")!
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("error: \(error)")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode) else {
+                    let okAction = UIAlertAction(title: "OK", style: .default)
+                    
+                    let alert = UIAlertController(title: "Cannot Save Event",
+                                                  message: "We're sorry, but we're having trouble getting your events. Please try again later.",
+                                                  preferredStyle: .alert)
+                    
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true)
+                    return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let events = try! decoder.decode([CalendarEvent].self, from: data)
+                print("got data: \(events)")
+            }
+        }
+        
+        task.resume()
     }
 }

@@ -34,3 +34,13 @@ struct CalendarEvent: Encodable {
         try event.encode(description, forKey: .description)
     }
 }
+
+extension CalendarEvent: Decodable {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: Event.self)
+        title = try values.decode(String.self, forKey: .title)
+        startDate = try values.decode(Date.self, forKey: .startDate)
+        endDate = try values.decode(Date.self, forKey: .endDate)
+        description = try values.decode(String.self, forKey: .description)
+    }
+}
