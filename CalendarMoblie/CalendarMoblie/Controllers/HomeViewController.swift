@@ -10,10 +10,11 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFieldDelegate {
     //MARK: Model
-    var days: [CalendarEvent] = []
+    var events: [CalendarEvent] = []
     let today = Date()
     var displayedDate = Date()
     let userCalendar = Calendar.current
+    var days: [Int] = []
     
     //MARK: Properties
     @IBOutlet weak var displayedDateLabel: UILabel!
@@ -23,12 +24,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateDisplayedDateLabel()
+        udpateDisplayMonth()
         fetchEvents()
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,9 +36,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         
         let day = collectionView.dequeueReusableCell(withReuseIdentifier: "Day", for: indexPath) as! CalendarViewDay
         
-        day.dayNumberLabel.text = days[indexPath.item].title
+        day.dayNumberLabel.text = dateText(idx: indexPath.item)
         
         return day
+    }
+    
+    func dateText(idx: Int) -> String {
+        switch days[idx] {
+        case 0:
+            return ""
+        default:
+            return String(days[idx])
+        }
     }
     
     func updateDisplayedDateLabel() {
@@ -51,16 +57,33 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         
         displayedDateLabel.text = "\(month) \(year)"
     }
+    
+    func udpateDisplayMonth() {
+        updateDisplayedDateLabel()
+        days = Array(repeating: 0, count: numberOfEmptyDays())
+        let daysInMonth = userCalendar.range(of: .day, in: .month, for: displayedDate)!
+        days += Array(daysInMonth.lowerBound..<daysInMonth.upperBound)
+        DispatchQueue.main.async {
+            self.collectionView!.reloadData()
+        }
+    }
+    
+    func numberOfEmptyDays() -> Int {
+        let startOfMonth = userCalendar.date(from: userCalendar.dateComponents([.year, .month], from: userCalendar.startOfDay(for: displayedDate)))!
+        let weekDay = userCalendar.component(.weekday, from: startOfMonth)
+        return weekDay - 1
+    }
+    
     //MARK: Actions
     
     @IBAction func displayNextMonth(_ sender: UIButton) {
         displayedDate = userCalendar.date(byAdding: .month, value: 1, to: displayedDate)!
-        updateDisplayedDateLabel()
+        udpateDisplayMonth()
     }
     
     @IBAction func displayPrevMonth(_ sender: UIButton) {
         displayedDate = userCalendar.date(byAdding: .month, value: -2, to: displayedDate)!
-        updateDisplayedDateLabel()
+        udpateDisplayMonth()
     }
     
     func fetchEvents() {
@@ -90,7 +113,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
                 decoder.dateDecodingStrategy = .iso8601
                 let events = try! decoder.decode([CalendarEvent].self, from: data)
                 print("got data: \(events)")
-                self.days = events
+                self.events = events
                 DispatchQueue.main.async {
                  self.collectionView!.reloadData()
                 }
