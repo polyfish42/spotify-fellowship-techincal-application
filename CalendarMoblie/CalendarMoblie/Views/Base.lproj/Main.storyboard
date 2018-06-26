@@ -45,18 +45,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="39" height="37"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-Z2-XyV" customClass="IdentifiedButton" customModule="CalendarMoblie" customModuleProvider="target">
-                                                    <rect key="frame" x="-4" y="3" width="46" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mET-uf-ft2" customClass="DatedLabel" customModule="CalendarMoblie" customModuleProvider="target">
+                                                    <rect key="frame" x="-2" y="8" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <action selector="tappedDay:" destination="QbW-Ne-Upd" eventType="touchUpInside" id="udK-MJ-IAY"/>
-                                                    </connections>
-                                                </button>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <connections>
-                                            <outlet property="dayNumberLabel" destination="2Sw-Z2-XyV" id="7Q2-dZ-4JD"/>
+                                            <outlet property="dayNumberLabel" destination="mET-uf-ft2" id="6md-Xd-prt"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

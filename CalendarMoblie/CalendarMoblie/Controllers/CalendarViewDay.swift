@@ -8,12 +8,29 @@
 
 import UIKit
 
-class IdentifiedButton: UIButton {
-    var buttonIdentifier: Date!
+protocol dayDelegate: class {
+    func tapped(day: Date)
+}
+
+class DatedLabel: UILabel {
+    var date: Date!
 }
 
 class CalendarViewDay: UICollectionViewCell {
-    var hasEvents: Bool = false
+    @IBOutlet weak var dayNumberLabel: DatedLabel!
+    weak var delegate: dayDelegate?
     
-    @IBOutlet weak var dayNumberLabel: IdentifiedButton!
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CalendarViewDay.tapFunction))
+        dayNumberLabel.isUserInteractionEnabled = true
+        dayNumberLabel.addGestureRecognizer(tap)
+    }
+    
+    @objc
+    func tapFunction(sender:UITapGestureRecognizer) {
+//        print(dayNumberLabel.date)
+        delegate?.tapped(day: dayNumberLabel.date)
+    }
 }

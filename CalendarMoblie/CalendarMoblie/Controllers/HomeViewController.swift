@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension HomeViewController: dayDelegate {
+    func tapped(day: Date) {
+       print(filterEvents(day: day))
+    }
+}
+
 class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFieldDelegate {
     //MARK: Model
     var events: [CalendarEvent] = []
@@ -36,8 +42,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         
         let day = collectionView.dequeueReusableCell(withReuseIdentifier: "Day", for: indexPath) as! CalendarViewDay
         
-        day.dayNumberLabel.setTitle(dateText(idx: indexPath.item), for: .normal)
-        day.dayNumberLabel.buttonIdentifier = days[indexPath.item]
+        day.delegate = self
+        day.dayNumberLabel.text = dateText(idx: indexPath.item)
+        day.dayNumberLabel.date = days[indexPath.item]
         
         return day
     }
@@ -107,14 +114,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         udpateDisplayMonth()
     }
     
-    @IBAction func tappedDay(_ sender: IdentifiedButton) {
-        if let day = sender.buttonIdentifier {
-         print(filterEvents(day: day))
-        }
-    }
-    
     func filterEvents(day: Date) -> [CalendarEvent] {
-        print(day)
         return events.filter { (event) -> Bool in
             let start = userCalendar.startOfDay(for: event.startDate)
             let end = userCalendar.startOfDay(for: event.endDate)
