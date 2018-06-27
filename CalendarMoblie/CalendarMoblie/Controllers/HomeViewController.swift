@@ -18,7 +18,7 @@ extension HomeViewController: dayDelegate {
     }
 }
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout {
     //MARK: Model
     var events: [CalendarEvent] = []
     var filteredEvents: [CalendarEvent] = []
@@ -31,13 +31,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     @IBOutlet weak var displayedDateLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    
     //MARK: Initialize
+    override func viewWillAppear(_ animated: Bool){
+        fetchEvents()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         udpateDisplayMonth()
-        fetchEvents()
+        // Note, may want to fetch events here if there are issues with a slow connection
     }
     
     //MARK: Conform to UICollectionView
@@ -60,6 +64,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         }
         
         return day
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: (width)/8, height: (width)/8)
     }
     
     //MARK: Conform to UITableView
@@ -198,6 +207,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
                 let events = try! decoder.decode([CalendarEvent].self, from: data)
                 print("got data: \(events)")
                 self.events = events
+                self.tapped(day: self.userCalendar.startOfDay(for: self.today))
                 DispatchQueue.main.async {
                     self.collectionView!.reloadData()
                 }
