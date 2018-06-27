@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5026C7D020DD6DA800AE4C85 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5026C7CF20DD6DA800AE4C85 /* CalendarEvent.swift */; };
+		502D8BD220E312C200464530 /* TableViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502D8BD120E312C200464530 /* TableViewEvent.swift */; };
 		50C71B7420E179930067B71D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C71B7320E179930067B71D /* HomeViewController.swift */; };
 		50C71B7820E1941E0067B71D /* CalendarViewDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C71B7720E1941E0067B71D /* CalendarViewDay.swift */; };
 		50D26A7820DAF76F00995340 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D26A7720DAF76F00995340 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		5026C7CF20DD6DA800AE4C85 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
+		502D8BD120E312C200464530 /* TableViewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEvent.swift; sourceTree = "<group>"; };
 		50C71B7320E179930067B71D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; tabWidth = 3; };
 		50C71B7720E1941E0067B71D /* CalendarViewDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDay.swift; sourceTree = "<group>"; };
 		50D26A7420DAF76F00995340 /* CalendarMoblie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMoblie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				50D26A7920DAF76F00995340 /* NewEventViewController.swift */,
 				50C71B7320E179930067B71D /* HomeViewController.swift */,
 				50C71B7720E1941E0067B71D /* CalendarViewDay.swift */,
+				502D8BD120E312C200464530 /* TableViewEvent.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				5026C7D020DD6DA800AE4C85 /* CalendarEvent.swift in Sources */,
 				50D26A7820DAF76F00995340 /* AppDelegate.swift in Sources */,
 				50C71B7820E1941E0067B71D /* CalendarViewDay.swift in Sources */,
+				502D8BD220E312C200464530 /* TableViewEvent.swift in Sources */,
 				50C71B7420E179930067B71D /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

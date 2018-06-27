@@ -30,7 +30,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     //MARK: Properties
     @IBOutlet weak var displayedDateLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     //MARK: Initialize
     
@@ -53,6 +52,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         day.delegate = self
         day.dayNumberLabel.text = dateText(idx: indexPath.item)
         day.dayNumberLabel.date = days[indexPath.item]
+
+        if day.dayNumberLabel.date == userCalendar.startOfDay(for: today) {
+            day.dayNumberLabel.textColor = .red
+        } else {
+            day.dayNumberLabel.textColor = .black
+        }
         
         return day
     }
@@ -67,11 +72,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCellReuse")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCellReuse") as! TableViewEvent
+        
         let text = filteredEvents[indexPath.row].title
-        cell.textLabel?.text = text
+        cell.eventTitle.text = text
+        cell.eventStartTime.text = formatTime(date: filteredEvents[indexPath.row].startDate)
+        cell.eventEndTime.text = formatTime(date: filteredEvents[indexPath.row].endDate)
         
         return cell
+    }
+    
+    //MARK: View Helpers
+    
+    func formatTime(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("HH:mm")
+        return formatter.string(from: date)
     }
     
     func dateText(idx: Int) -> String {
