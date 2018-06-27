@@ -10,13 +10,18 @@ import UIKit
 
 extension HomeViewController: dayDelegate {
     func tapped(day: Date) {
-       print(filterEvents(day: day))
+        filteredEvents = filterEvents(day: day)
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFieldDelegate {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFieldDelegate, UITableViewDataSource {
     //MARK: Model
     var events: [CalendarEvent] = []
+    var filteredEvents: [CalendarEvent] = []
     let today = Date()
     var displayedDate = Date()
     let userCalendar = Calendar.current
@@ -24,16 +29,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     
     //MARK: Properties
     @IBOutlet weak var displayedDateLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     //MARK: Initialize
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
         udpateDisplayMonth()
         fetchEvents()
     }
     
+    //MARK: Conform to UICollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return days.count
     }
@@ -47,6 +55,23 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         day.dayNumberLabel.date = days[indexPath.item]
         
         return day
+    }
+    
+    //MARK: Conform to UITableView
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredEvents.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCellReuse")!
+        let text = filteredEvents[indexPath.row].title
+        cell.textLabel?.text = text
+        
+        return cell
     }
     
     func dateText(idx: Int) -> String {
@@ -72,6 +97,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         days += datesInDisplayedMonth()
         DispatchQueue.main.async {
             self.collectionView!.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -123,7 +149,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
             
             let start = startOfDay(date: event.startDate)
             let end = startOfDay(date: event.endDate)
-
+            
             return (start...end).contains(day)
         }
     }
@@ -157,7 +183,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
                 print("got data: \(events)")
                 self.events = events
                 DispatchQueue.main.async {
-                 self.collectionView!.reloadData()
+                    self.collectionView!.reloadData()
                 }
             }
         }
