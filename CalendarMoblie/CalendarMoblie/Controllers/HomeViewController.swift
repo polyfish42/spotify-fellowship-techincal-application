@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     @IBOutlet weak var displayedDateLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var calendarHeight: NSLayoutConstraint!
     
     //MARK: Initialize
     override func viewWillAppear(_ animated: Bool){
@@ -42,7 +43,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         tableView.dataSource = self
         tableView.separatorInset = .zero
         udpateDisplayMonth()
-        // Note, may want to fetch events here if there are issues with a slow connection
     }
     
     //MARK: Conform to UICollectionView
@@ -124,6 +124,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
         DispatchQueue.main.async {
             self.collectionView!.reloadData()
             self.tableView.reloadData()
+        }
+        updateCalendarHeight()
+    }
+    
+    func updateCalendarHeight() {
+        let rowHeight = UIScreen.main.bounds.width / 8
+        
+        if days.count <= 28 {
+            calendarHeight.constant = rowHeight * 4
+        } else if days.count <= 35 {
+            calendarHeight.constant = rowHeight * 5
+        } else {
+            calendarHeight.constant = rowHeight * 6
         }
     }
     
