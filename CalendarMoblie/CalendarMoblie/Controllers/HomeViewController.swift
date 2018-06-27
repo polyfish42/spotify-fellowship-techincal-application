@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.separatorInset = .zero
         udpateDisplayMonth()
         // Note, may want to fetch events here if there are issues with a slow connection
     }
