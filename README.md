@@ -1,4 +1,6 @@
 # ios-calendar
+Live Backend: https://spotify-ios-backend.herokuapp.com/api/events
+Build CalendarMobile in Xcode to test the app
 
 ## Todo
 - [X] Click on a day box, and be able to create a new event on that day which gets sent to the backend on clicking submit. 
