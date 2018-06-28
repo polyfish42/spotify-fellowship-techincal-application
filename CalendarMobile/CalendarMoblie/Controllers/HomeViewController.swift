@@ -194,7 +194,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UITextFi
     }
     
     func fetchEvents() {
-        let url = URL(string: "http://localhost:3000/api/events")!
+        let url = URL(string: "https://spotify-ios-backend.herokuapp.com/api/events")!
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {

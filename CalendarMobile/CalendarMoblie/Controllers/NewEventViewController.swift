@@ -171,7 +171,7 @@ class NewEventViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let url = URL(string: "http://localhost:3000/api/events")!
+        let url = URL(string: "https://spotify-ios-backend.herokuapp.com/api/events")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
